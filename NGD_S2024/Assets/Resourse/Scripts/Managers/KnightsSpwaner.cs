@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.Mathematics;
 using Unity.Netcode;
+using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -14,6 +15,7 @@ public class KnightsSpwaner : NetworkBehaviour
     public GameObject playerPrefab;
  
     public Button startGameBttn;
+    public GameObject mainUI;
   
    
     private int spawnIndex = 0;
@@ -46,14 +48,17 @@ public class KnightsSpwaner : NetworkBehaviour
 
             Vector3 myPOS = mySpawns[spawnIndex].TransformPoint(0f,0f,0f);
             //spawn a player
-            GameObject playerSpawn = Instantiate(playerPrefab, myPOS, quaternion.identity);
+            GameObject playerSpawn = Instantiate(NetworkManager.GetNetworkPrefabOverride(playerPrefab), myPOS, quaternion.identity);
             
-            
-            playerSpawn.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
+            NetworkManager.print("The client ID is "+clientID);
+            //playerSpawn.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
+            playerSpawn.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientID);
+           
+           
             //playerSpawn.GetComponent<SkinChanger>().setCharClientRpc(spawnedChar);
-            //playerSpawn.GetComponent<SkinChanger>().randomMatClientRpc();
+          //  playerSpawn.GetComponent<SkinChanger>().randomMatClientRpc();
               
-            if (spawnIndex > mySpawns.Length - 1)
+            if (spawnIndex < mySpawns.Length - 1)
               {
 
                   spawnIndex++;
@@ -65,10 +70,15 @@ public class KnightsSpwaner : NetworkBehaviour
 
             spawnedChar++;
         }
-        
+
+        StartClientRpc();
     }
 
-    
+    [ClientRpc]
+    private void StartClientRpc()
+    {
+        mainUI.SetActive(false);
+    }
         
     
 

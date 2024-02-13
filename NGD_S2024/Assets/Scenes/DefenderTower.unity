@@ -6054,8 +6054,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aac7e44b8e1337642930e2a3f02bc9f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 7494437238306686925, guid: fe381a611aa59914abda8d7b358a3468, type: 3}
+  playerPrefab: {fileID: 9092340344623632315, guid: ea47a82c85357584a94012528a7d76fd, type: 3}
   startGameBttn: {fileID: 1827708910}
+  mainUI: {fileID: 1449005539}
   mySpawns:
   - {fileID: 780800185}
   - {fileID: 1902712166}
@@ -41332,7 +41333,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1827708909}
   m_Father: {fileID: 1693239093}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -47871,7 +47873,6 @@ RectTransform:
   - {fileID: 345470206}
   - {fileID: 1289952763}
   - {fileID: 1449005540}
-  - {fileID: 1827708909}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -51427,13 +51428,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1827708908}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00016376}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2065207560}
-  m_Father: {fileID: 1693239093}
+  m_Father: {fileID: 1449005540}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

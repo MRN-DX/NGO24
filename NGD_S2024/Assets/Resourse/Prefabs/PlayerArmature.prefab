@@ -5575,7 +5575,7 @@ Transform:
   m_GameObject: {fileID: 9092340344623632315}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.3, y: 9.26, z: 45.53}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5872,7 +5872,7 @@ MonoBehaviour:
   UseHalfFloatPrecision: 0
   InLocalSpace: 0
   Interpolate: 1
-  SlerpPosition: 0
+  SlerpPosition: 1
 --- !u!114 &3235502784905681989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5891,6 +5891,10 @@ MonoBehaviour:
   - {fileID: 5204837201630890814}
   - {fileID: 8228701130523328286}
   - {fileID: 7919663353399606913}
+  currentCharId:
+    m_InternalValue: 0
+  currentMatId:
+    m_InternalValue: 0
   myMats:
   - {fileID: 2100000, guid: ccae2dc6cf6f0c4479b782fedd0c8172, type: 2}
   - {fileID: 2100000, guid: 396f7abc9b4541548968e21a142b20d0, type: 2}
