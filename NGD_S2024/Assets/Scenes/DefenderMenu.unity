@@ -418,7 +418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1055790986
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1457,7 +1457,6 @@ MonoBehaviour:
   serverBttn: {fileID: 1055790987}
   startBttn: {fileID: 1639037068}
   statusTxt: {fileID: 1725276851}
-  startUI: {fileID: 1639037066}
 --- !u!1001 &1954205491
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1469,6 +1468,22 @@ PrefabInstance:
     - target: {fileID: 40743432510630798, guid: 8c42fc10795d8784f9ce56c62c3f7a3b, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -47
+      objectReference: {fileID: 0}
+    - target: {fileID: 742137004498908850, guid: 8c42fc10795d8784f9ce56c62c3f7a3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742137004498908850, guid: 8c42fc10795d8784f9ce56c62c3f7a3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1573564134}
+    - target: {fileID: 742137004498908850, guid: 8c42fc10795d8784f9ce56c62c3f7a3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 742137004498908850, guid: 8c42fc10795d8784f9ce56c62c3f7a3b, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6433353701455964380, guid: 8c42fc10795d8784f9ce56c62c3f7a3b, type: 3}
       propertyPath: m_Pivot.x
@@ -1553,6 +1568,10 @@ PrefabInstance:
     - target: {fileID: 7058120084795950179, guid: 8c42fc10795d8784f9ce56c62c3f7a3b, type: 3}
       propertyPath: m_Name
       value: ClientHost
+      objectReference: {fileID: 0}
+    - target: {fileID: 7058120084795950179, guid: 8c42fc10795d8784f9ce56c62c3f7a3b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

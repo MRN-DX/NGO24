@@ -24,20 +24,34 @@ public class KnightsSpwaner : NetworkBehaviour
     private void Start()
     {
         
+       
         
         if (IsHost)
         {
             startGameBttn.onClick.AddListener(SpawnPlayers);
+            
             
         }
         else
         {
             startGameBttn.gameObject.SetActive(false);
         }
-        
+
+        if (IsServer)
+        {
+            NetworkManager.OnClientDisconnectCallback += OnClientDC_ClientRpc;
+        }
        
     }
 
+    [ClientRpc]
+    private void OnClientDC_ClientRpc(ulong id)
+    {
+         
+      
+    }
+
+    
     private void SpawnPlayers()
     {
 
@@ -47,9 +61,17 @@ public class KnightsSpwaner : NetworkBehaviour
             Vector3 myPOS = mySpawns[spawnIndex].TransformPoint(0f,0f,0f);
             //spawn a player
             GameObject playerSpawn = Instantiate(playerPrefab, myPOS, quaternion.identity);
-            
-            
+
+           
+            //TODO Debug ownership so we're not controlling both.
             playerSpawn.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
+           
+
+            
+           // someObject.GetComponent<NetworkObject>().TrySetParent(playerSpawn);
+
+         
+            
             //playerSpawn.GetComponent<SkinChanger>().setCharClientRpc(spawnedChar);
             //playerSpawn.GetComponent<SkinChanger>().randomMatClientRpc();
               

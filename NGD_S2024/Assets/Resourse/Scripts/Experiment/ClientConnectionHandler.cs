@@ -38,7 +38,7 @@ public class ClientConnectionHandler : NetworkBehaviour
         {
             response.PlayerPrefabHash = AlternatePlayerPrefabs[playerPrefabIndex];
         }
-        else
+        else    
         {
             Debug.LogError($"Client provided player Prefab index of {playerPrefabIndex} when there are only {AlternatePlayerPrefabs.Count} entries!");
             return;

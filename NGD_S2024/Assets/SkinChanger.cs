@@ -67,4 +67,6 @@ public class SkinChanger : NetworkBehaviour
         setMatClientRpc(currentMatId.Value);
        
     }
+    
+    
 }

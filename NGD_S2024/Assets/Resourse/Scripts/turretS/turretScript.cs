@@ -27,6 +27,7 @@ public class TurretScript : NetworkBehaviour
 
     private void Update()
     {
+        
         if (IsHost || IsServer)
         {
             if (Input.GetKeyUp(KeyCode.Space))

@@ -14,7 +14,6 @@ public class UI_NetManager : NetworkBehaviour
     [SerializeField] private Button hostBttn, joinBttn, serverBttn, startBttn;
 
     public TMP_Text statusTxt;
-    public GameObject startUI;
     private void Start()
     {
         //Listeners for buttns
@@ -23,7 +22,7 @@ public class UI_NetManager : NetworkBehaviour
         joinBttn.onClick.AddListener(JoinClick);
         serverBttn.onClick.AddListener(ServerClick);
 
-        //subscribe to events
+        //subscribe to events, fires when a client joins or a server started
         NetworkManager.OnServerStarted += OnServerStarted;
         NetworkManager.OnClientStarted += OnClientStarted;
       
@@ -32,12 +31,11 @@ public class UI_NetManager : NetworkBehaviour
     }
 
     
-    
+    // Event calls 
     private void OnServerStarted()
     {
         startBttn.gameObject.SetActive(true);
         statusTxt.text = "Press Start";
-
     }
 
 
@@ -49,8 +47,8 @@ public class UI_NetManager : NetworkBehaviour
         }
         
     }
-
-
+    
+    // bttn clicks
     private void StartBttnClick()
     {
         StartGame();
@@ -59,7 +57,7 @@ public class UI_NetManager : NetworkBehaviour
     private void StartGame()
     {
         // tell the manager to load the scene for everyone 
-        NetworkManager.SceneManager.LoadScene("DefenderTower", LoadSceneMode.Single);
+        NetworkManager.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
     }
     
    
