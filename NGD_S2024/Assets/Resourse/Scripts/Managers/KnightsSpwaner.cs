@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.Mathematics;
 using Unity.Netcode;
+using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -14,6 +15,7 @@ public class KnightsSpwaner : NetworkBehaviour
     public GameObject playerPrefab;
  
     public Button startGameBttn;
+    public GameObject mainUI;
   
    
     private int spawnIndex = 0;
@@ -24,34 +26,20 @@ public class KnightsSpwaner : NetworkBehaviour
     private void Start()
     {
         
-       
         
         if (IsHost)
         {
             startGameBttn.onClick.AddListener(SpawnPlayers);
-            
             
         }
         else
         {
             startGameBttn.gameObject.SetActive(false);
         }
-
-        if (IsServer)
-        {
-            NetworkManager.OnClientDisconnectCallback += OnClientDC_ClientRpc;
-        }
+        
        
     }
 
-    [ClientRpc]
-    private void OnClientDC_ClientRpc(ulong id)
-    {
-         
-      
-    }
-
-    
     private void SpawnPlayers()
     {
 
@@ -60,22 +48,17 @@ public class KnightsSpwaner : NetworkBehaviour
 
             Vector3 myPOS = mySpawns[spawnIndex].TransformPoint(0f,0f,0f);
             //spawn a player
-            GameObject playerSpawn = Instantiate(playerPrefab, myPOS, quaternion.identity);
-
-           
-            //TODO Debug ownership so we're not controlling both.
-            playerSpawn.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
-           
-
+            GameObject playerSpawn = Instantiate(NetworkManager.GetNetworkPrefabOverride(playerPrefab), myPOS, quaternion.identity);
             
-           // someObject.GetComponent<NetworkObject>().TrySetParent(playerSpawn);
-
-         
-            
+            NetworkManager.print("The client ID is "+clientID);
+            //playerSpawn.GetComponent<NetworkObject>().SpawnWithOwnership(clientID);
+            playerSpawn.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientID);
+           
+           
             //playerSpawn.GetComponent<SkinChanger>().setCharClientRpc(spawnedChar);
-            //playerSpawn.GetComponent<SkinChanger>().randomMatClientRpc();
+          //  playerSpawn.GetComponent<SkinChanger>().randomMatClientRpc();
               
-            if (spawnIndex > mySpawns.Length - 1)
+            if (spawnIndex < mySpawns.Length - 1)
               {
 
                   spawnIndex++;
@@ -87,10 +70,15 @@ public class KnightsSpwaner : NetworkBehaviour
 
             spawnedChar++;
         }
-        
+
+        StartClientRpc();
     }
 
-    
+    [ClientRpc]
+    private void StartClientRpc()
+    {
+        mainUI.SetActive(false);
+    }
         
     
 

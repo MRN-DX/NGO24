@@ -20,51 +20,59 @@ public class SkinChanger : NetworkBehaviour
     private Material[] myMats;
 
 
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            setCharServerRpc((int)OwnerClientId);
+            randomCharAndMatServerRpc();
+        }
+    }
+
     //Swap char
-    [ClientRpc]
-    public void setCharClientRpc(int charID)
+    [ServerRpc]
+    public void setCharServerRpc(int charID)
     {
         foreach (GameObject cGO in CharacterGO)
         {
             cGO.SetActive(false);
         }
-
         currentCharId.Value = charID;
         CharacterGO[currentCharId.Value].SetActive(true);
     }
     
-    [ClientRpc]
-    public void setMatClientRpc(int matID)
+    [ServerRpc]
+    public void setMatServerRpc(int matID)
     {
         // set materials
         currentMatId.Value = matID;
         CharacterGO[currentCharId.Value].GetComponent<SkinnedMeshRenderer>().material = myMats[matID];
     }
    
-    [ClientRpc]
-    public void randomCharAndMatClientRpc()
+    [ServerRpc]
+    public void randomCharAndMatServerRpc()
     {
         currentCharId.Value = Random.Range(0, CharacterGO.Length - 1);
         currentMatId.Value = Random.Range(0, myMats.Length - 1);
-        setCharClientRpc(currentCharId.Value);
-        setMatClientRpc(currentMatId.Value);
+        setCharServerRpc(currentCharId.Value);
+        setMatServerRpc(currentMatId.Value);
 
 
     }
    
-    [ClientRpc]
-    public void randomCharClientRpc()
+    [ServerRpc]
+    public void randomCharServerRpc()
     {
         currentCharId.Value = Random.Range(0, CharacterGO.Length - 1);
-        setCharClientRpc(currentCharId.Value);
+        setCharServerRpc(currentCharId.Value);
        
     }
    
-    [ClientRpc]
-    public void randomMatClientRpc()
+    [ServerRpc]
+    public void randomMatServerRpc()
     {
         currentMatId.Value = Random.Range(0, myMats.Length - 1);
-        setMatClientRpc(currentMatId.Value);
+        setMatServerRpc(currentMatId.Value);
        
     }
     

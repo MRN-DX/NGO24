@@ -1,4 +1,5 @@
-﻿ using UnityEngine;
+﻿ using Unity.Netcode;
+ using UnityEngine;
 #if ENABLE_INPUT_SYSTEM 
 using UnityEngine.InputSystem;
 #endif
@@ -12,7 +13,7 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM 
     [RequireComponent(typeof(PlayerInput))]
 #endif
-    public class ThirdPersonController : MonoBehaviour
+    public class ThirdPersonController : NetworkBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -154,11 +155,16 @@ namespace StarterAssets
 
         private void Update()
         {
-            _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
-            GroundedCheck();
-            Move();
+            if (IsOwner)
+            {
+                _hasAnimator = TryGetComponent(out _animator);
+
+                JumpAndGravity();
+                GroundedCheck();
+                Move();
+            }
+         
         }
 
         private void LateUpdate()
@@ -211,6 +217,11 @@ namespace StarterAssets
                 _cinemachineTargetYaw, 0.0f);
         }
 
+
+        private void HandleMoveServerAuth()
+        {
+            
+        }
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
