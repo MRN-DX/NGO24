@@ -740,9 +740,9 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 6
+  m_ChildAlignment: 4
   m_Spacing: 0
-  m_ChildForceExpandWidth: 0
+  m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
@@ -1861,10 +1861,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1729183661}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57e77f37bd3afbf42bd9f68bc6830f1f, type: 3}
+  m_Script: {fileID: 11500000, guid: 37b31cc9b29df9e42bd1d240aceca16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MessagePrefab: {fileID: 8193277701551844858, guid: d117bbea8cf0fac49b777f7d69233a5a, type: 3}
+  MessagePrefab: {fileID: 5031481924297279706, guid: cf141c01f2fc5b5408a0cf3266cc3d90, type: 3}
   enterBttn: {fileID: 321010980}
   inputText: {fileID: 256969730}
   ScrollViewContentGO: {fileID: 405863776}
