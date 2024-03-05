@@ -9,9 +9,12 @@ public class LobbyManager : NetworkBehaviour
 {
     //our UI buttons in the lobby UI
     [SerializeField] Button startBttn, leaveBttn, readyBttn;
-
+  
     [SerializeField] private GameObject PanelPrefab;
     [SerializeField] private GameObject ContentGO;
+    
+    
+    
     
     public NetworkList<PlayerInfo> allNetPlayers = new NetworkList<PlayerInfo>();
     private List<GameObject> playerPanels = new List<GameObject>();
@@ -38,9 +41,6 @@ public class LobbyManager : NetworkBehaviour
 
     public override void OnNetworkSpawn()
     {
-        
-
-
         if (IsHost)
         {
             NetworkManager.Singleton.OnClientConnectedCallback += HostOnClientConnected;
@@ -52,7 +52,21 @@ public class LobbyManager : NetworkBehaviour
 
         if (IsClient)
         {
+            //networklist
             allNetPlayers.OnListChanged += ClientOnAllPlayersChanged;
+            NetworkManager.Singleton.OnClientDisconnectCallback += ClientDissconnected;
+        }
+    }
+
+    private void ClientDissconnected(ulong clientID)
+    {
+        foreach (PlayerInfo pi in allNetPlayers)
+        {
+            if (pi._clientId == clientID)
+            {
+                allNetPlayers.Remove(pi);
+            }
+            
         }
     }
 

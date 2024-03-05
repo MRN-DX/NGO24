@@ -577,72 +577,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 494278312}
   m_CullTransparentMesh: 1
---- !u!1 &548755748
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 548755751}
-  - component: {fileID: 548755750}
-  - component: {fileID: 548755749}
-  m_Layer: 0
-  m_Name: NetworkedPlayers
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &548755749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548755748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3039409248
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 0
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 0
-  DontDestroyWithOwner: 1
-  AutoObjectParentSync: 1
---- !u!114 &548755750
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548755748}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eea1490f48ad3164b91bde7b1bb1f5d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerCount: 0
---- !u!4 &548755751
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 548755748}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 212.01718, y: 234.02106, z: -48.425568}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &572636177
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,7 +1066,7 @@ GameObject:
   - component: {fileID: 1385059862}
   - component: {fileID: 1385059861}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: LobbyManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1167,7 +1101,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1385059860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88ef151cb56d993418d80d8b2ecd0671, type: 3}
+  m_Script: {fileID: 11500000, guid: d69ac70157f908a4ea372e1864271c05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   startBttn: {fileID: 822721760}
@@ -2490,4 +2424,3 @@ SceneRoots:
   - {fileID: 2109125767}
   - {fileID: 1385059863}
   - {fileID: 2076031565}
-  - {fileID: 548755751}
