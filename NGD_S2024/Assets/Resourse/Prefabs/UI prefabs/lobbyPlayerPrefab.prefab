@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 300, y: -20}
+  m_AnchoredPosition: {x: 300, y: -20.000008}
   m_SizeDelta: {x: -628, y: -180}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7383253964898044723
@@ -159,6 +159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 505077440616939189}
+  - component: {fileID: 2519712777019543344}
   m_Layer: 5
   m_Name: lobbyPlayerPrefab
   m_TagString: Untagged
@@ -189,6 +190,21 @@ RectTransform:
   m_AnchoredPosition: {x: 370.8, y: -139.579}
   m_SizeDelta: {x: 728.03, y: 279.158}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2519712777019543344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6052258319374113533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a039d7d2cb0bc464ab6e8f68d0174d91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerText: {fileID: 8531615482757375990}
+  readyImage: {fileID: 3896896825514568070}
+  colorImage: {fileID: 1344953656222911626}
 --- !u!1 &7834624700938844092
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +373,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0025634766, y: 5.168}
+  m_AnchoredPosition: {x: -0.0025634766, y: 5.1679993}
   m_SizeDelta: {x: 0.005, y: -33.447}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8451922608094119374

@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - CinemachineTarget
-  - Spawner
-  - Projectile
-  - Cursor
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -15,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Platform
-  - projectile
-  - Spawner
+  - 
+  - 
+  - 
   - 
   - 
   - 

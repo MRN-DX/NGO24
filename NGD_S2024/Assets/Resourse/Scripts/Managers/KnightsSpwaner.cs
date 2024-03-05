@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Unity.Mathematics;
 using Unity.Netcode;
-using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
 using UnityEngine.UI;
-using Debug = UnityEngine.Debug;
 
 public class KnightsSpwaner : NetworkBehaviour
 {
@@ -104,7 +102,7 @@ public class KnightsSpwaner : NetworkBehaviour
     private void OnClientConnectedCallback(ulong id)
     {
         SetPlayerServerRpc(id);
-       
+      
     }
 
 
@@ -113,8 +111,9 @@ public class KnightsSpwaner : NetworkBehaviour
     {
         Transform tempT = mySpawns[spawnIndex];
         //get the client GO and set it.
+        NetworkManager.Singleton.ConnectedClients[id].PlayerObject.GetComponent<CharacterController>().enabled = false;
         NetworkManager.Singleton.ConnectedClients[id].PlayerObject.gameObject.transform.position = tempT.position; 
-      
+        NetworkManager.Singleton.ConnectedClients[id].PlayerObject.GetComponent<CharacterController>().enabled = true;
         spawnIndex++;
     }
 }

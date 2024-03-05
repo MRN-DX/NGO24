@@ -5,28 +5,34 @@ using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
-public struct PlayerInfo : INetworkSerializable, IEquatable<PlayerInfo>, IDisposable
+public struct PlayerInfo : INetworkSerializable, IEquatable<PlayerInfo>
 {
-    public ulong clientId;
-    public FixedString128Bytes Name;
-    public bool isPlayerReady;
+    public ulong _clientId;
+    public FixedString128Bytes _Name;
+    public bool _isPlayerReady;
+    public int _ColorID;
 
     //Serializable requirement
+//structs must initilize values
+    public PlayerInfo(ulong id)
+    {
+        _clientId = id;
+        _ColorID = 0;
+        _Name = "";
+        _isPlayerReady = false;
+    }
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
-        serializer.SerializeValue(ref clientId);
-        serializer.SerializeValue(ref Name);
-        serializer.SerializeValue(ref isPlayerReady);
+        serializer.SerializeValue(ref _clientId);
+        serializer.SerializeValue(ref _Name);
+        serializer.SerializeValue(ref _isPlayerReady);
+        serializer.SerializeValue(ref _ColorID);
     }
 
     //required for IEquatable
     public bool Equals(PlayerInfo other)
     {
-        return clientId == other.clientId;
+        return _clientId == other._clientId;
     }
 
-    public void Dispose()
-    {
-        throw new NotImplementedException();
-    }
 }
