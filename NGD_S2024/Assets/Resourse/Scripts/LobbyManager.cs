@@ -2,23 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyManager : NetworkBehaviour
 {
     //our UI buttons in the lobby UI
+    
+    
     [SerializeField] Button startBttn, leaveBttn, readyBttn;
   
     [SerializeField] private GameObject PanelPrefab;
     [SerializeField] private GameObject ContentGO;
     
     
-    
-    
     public NetworkList<PlayerInfo> allNetPlayers = new NetworkList<PlayerInfo>();
     private List<GameObject> playerPanels = new List<GameObject>();
 
+    private ulong myLocalClientID;
 //Colors for users
     private Color[] playerColors = new Color[]
     {
@@ -31,11 +34,19 @@ public class LobbyManager : NetworkBehaviour
 
     private void Start()
     {
+      
         if (IsHost)
         {
-            AddPlayerToList(NetworkManager.LocalClientId);
+            foreach (NetworkClient nc in NetworkManager.ConnectedClientsList)
+            {
+               
+                AddPlayerToList(nc.ClientId);
+            }
+            
             RefreshPlayerPanels();
         }
+        
+        myLocalClientID = NetworkManager.LocalClientId;
     }
 
 
@@ -54,21 +65,13 @@ public class LobbyManager : NetworkBehaviour
         {
             //networklist
             allNetPlayers.OnListChanged += ClientOnAllPlayersChanged;
-            NetworkManager.Singleton.OnClientDisconnectCallback += ClientDissconnected;
+          //  NetworkManager.Singleton.OnClientDisconnectCallback += ClientDissconnected;
+           
         }
     }
 
-    private void ClientDissconnected(ulong clientID)
-    {
-        foreach (PlayerInfo pi in allNetPlayers)
-        {
-            if (pi._clientId == clientID)
-            {
-                allNetPlayers.Remove(pi);
-            }
-            
-        }
-    }
+   
+
 
     private void ClientOnAllPlayersChanged(NetworkListEvent<PlayerInfo> changeEvent)
     {
@@ -80,8 +83,9 @@ public class LobbyManager : NetworkBehaviour
            AddPlayerToList(clientID);
            RefreshPlayerPanels();
     }
-    
 
+
+   
 
     //  private NetworkList<PlayerInfo> allPlayers = new NetworkList<PlayerInfo>();
     // Start is called before the first frame update
@@ -96,9 +100,19 @@ public class LobbyManager : NetworkBehaviour
     private void AddPlayerPanel(PlayerInfo info)
     {
         GameObject newPanel = Instantiate(PanelPrefab, ContentGO.transform);
-        newPanel.GetComponent<LobbyPlayerLabel>().setPlayerName("Player "+info._clientId.ToString());
+        LobbyPlayerLabel LPL = newPanel.GetComponent<LobbyPlayerLabel>();
+        LPL.setPlayerName(info._clientId);
+       
+        if (IsServer)
+        {
+        LPL.onKickClicked += KikckUserBttn;
+        }
         
-       playerPanels.Add(newPanel);
+        if (IsClient && !IsHost || info._clientId == myLocalClientID)
+        {
+            LPL.setKickActive(false);
+        }
+        playerPanels.Add(newPanel);
     }
 
     private void RefreshPlayerPanels()
@@ -115,5 +129,43 @@ public class LobbyManager : NetworkBehaviour
             AddPlayerPanel(pi);
         }
     }
+    
+    
+    public void KikckUserBttn(ulong kickTarget)
+    {
+        if (!IsServer || !IsHost) return;
+        foreach (PlayerInfo pi in allNetPlayers)
+        {
+            if (pi._clientId == kickTarget)
+            {
+                allNetPlayers.Remove(pi);
+                
+                // send RPC to target client to discconnect/scene
+                DisconnectClient(kickTarget);
+               
+            }
+            
+        }
+      
+        RefreshPlayerPanels();
+    }
+
+    
+    public void DisconnectClient(ulong kickTarget)
+    {
+        ClientRpcParams clientRpcParams = default;
+        clientRpcParams.Send.TargetClientIds = new ulong[1] { kickTarget };
+        DisconnectionClientRPC(clientRpcParams);
+        NetworkManager.Singleton.DisconnectClient(kickTarget);
+        
+    }
+
+    [ClientRpc]
+    public void DisconnectionClientRPC(ClientRpcParams clientRpcParams)
+    {
+        SceneManager.LoadScene(0);
+    }
+ 
+    
     
 }

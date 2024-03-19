@@ -8,7 +8,7 @@ using UnityEngine;
 public struct PlayerInfo : INetworkSerializable, IEquatable<PlayerInfo>
 {
     public ulong _clientId;
-    public FixedString128Bytes _Name;
+    public FixedString32Bytes _Name;
     public bool _isPlayerReady;
     public int _ColorID;
 
@@ -34,5 +34,12 @@ public struct PlayerInfo : INetworkSerializable, IEquatable<PlayerInfo>
     {
         return _clientId == other._clientId;
     }
+    
+    
+    //  help with fixdd strings
+    public override string ToString() => _Name.Value.ToString();
+
+    public static implicit operator string(PlayerInfo name) => name.ToString();
+    public static implicit operator PlayerInfo(string s) => new PlayerInfo { _Name = new FixedString32Bytes(s) };
 
 }
