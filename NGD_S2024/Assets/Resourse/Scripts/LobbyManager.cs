@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -102,17 +103,62 @@ public class LobbyManager : NetworkBehaviour
         GameObject newPanel = Instantiate(PanelPrefab, ContentGO.transform);
         LobbyPlayerLabel LPL = newPanel.GetComponent<LobbyPlayerLabel>();
         LPL.setPlayerName(info._clientId);
+        
+       
        
         if (IsServer)
         {
         LPL.onKickClicked += KikckUserBttn;
+        
+        //Assume server is always ready and set it to true
+        
+        if(info._clientId == myLocalClientID){  info._isPlayerReady = true;}
+        readyBttn.GameObject().SetActive(false);
+        
+        
         }
         
         if (IsClient && !IsHost || info._clientId == myLocalClientID)
         {
             LPL.setKickActive(false);
         }
+        //Display ready status
+        LPL.SetReady(info._isPlayerReady);
+        LPL.SetIconColor(playerColors[FindPlayerIndex(info._clientId)]);
         playerPanels.Add(newPanel);
+    }
+
+    private int FindPlayerIndex(ulong clientID)
+    {
+        
+        int index = 0;
+        int myMatch = 0;
+        //
+        
+        
+        for(int i = 0; i > allNetPlayers.Count -1; i++)
+        {
+            if (clientID == allNetPlayers[i]._clientId)
+            {
+                myMatch = index;
+            } ;
+            
+        }
+        
+        /*
+        foreach (NetworkClient nc in NetworkManager.ConnectedClientsList)
+        {
+            if (nc.ClientId == clientID)
+            {
+                // match found 
+                myMatch = index;
+            }else{}
+
+            index++;
+        }
+        */
+        
+        return myMatch;
     }
 
     private void RefreshPlayerPanels()
