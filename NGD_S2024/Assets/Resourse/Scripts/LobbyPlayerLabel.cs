@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class LobbyPlayerLabel : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] protected TMP_Text PlayerText;
-    [SerializeField] protected Image readyImage, colorImage;
-    [SerializeField] protected Button kickBttn;
+    [SerializeField] private TMP_Text PlayerText;
+    [SerializeField] private Image readyImage, colorImage;
+    [SerializeField] private Button kickBttn;
 
     public event Action<ulong> onKickClicked;
     private ulong _clientID;
@@ -16,6 +16,7 @@ public class LobbyPlayerLabel : MonoBehaviour
     private void OnEnable()
     {
         kickBttn.onClick.AddListener(BtnKick_Clicked);
+     ;
     }
 
     public void setPlayerName(ulong playerName)
@@ -38,17 +39,17 @@ public class LobbyPlayerLabel : MonoBehaviour
     {
         if (ready)
         {
-            readyImage.material.color = Color.green;
+            readyImage.color = Color.green;
         }
         else
         {
-            readyImage.material.color = Color.red;
+            readyImage.color = Color.red;
         }
     }
 
     public void SetIconColor(Color color)
     {
-        colorImage.material.color = color;
+        colorImage.color = color;
     }
 
     

@@ -10,14 +10,14 @@ public struct PlayerInfo : INetworkSerializable, IEquatable<PlayerInfo>
     public ulong _clientId;
     public FixedString32Bytes _Name;
     public bool _isPlayerReady;
-    public int _ColorID;
+    public Color _ColorID;
 
     //Serializable requirement
 //structs must initilize values
     public PlayerInfo(ulong id)
     {
         _clientId = id;
-        _ColorID = 0;
+        _ColorID = Color.magenta;
         _Name = "";
         _isPlayerReady = false;
     }
