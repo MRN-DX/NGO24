@@ -1456,6 +1456,7 @@ MonoBehaviour:
   joinBttn: {fileID: 81323740}
   serverBttn: {fileID: 1055790987}
   startBttn: {fileID: 1639037068}
+  GameLevel: tanks
   statusTxt: {fileID: 1725276851}
 --- !u!1001 &1954205491
 PrefabInstance:

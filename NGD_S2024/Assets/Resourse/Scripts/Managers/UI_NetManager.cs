@@ -12,6 +12,7 @@ public class UI_NetManager : NetworkBehaviour
 {
 
     [SerializeField] private Button hostBttn, joinBttn, serverBttn, startBttn;
+    [SerializeField] private string GameLevel="Lobby";
 
     public TMP_Text statusTxt;
     private void Start()
@@ -57,7 +58,7 @@ public class UI_NetManager : NetworkBehaviour
     private void StartGame()
     {
         // tell the manager to load the scene for everyone 
-        NetworkManager.SceneManager.LoadScene("Lobby", LoadSceneMode.Single);
+        NetworkManager.SceneManager.LoadScene(GameLevel, LoadSceneMode.Single);
     }
     
    

@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DefenderMenu.unity
     guid: 636165ff0751edf42bf91b676b21804a
   - enabled: 1
+    path: Assets/Scenes/tanks.unity
+    guid: 3b43aabb7f8a8ba43958945a6c6941b2
+  - enabled: 0
     path: Assets/Scenes/Lobby.unity
     guid: 712b25fc443960e4d90298e34b6ee8e4
   - enabled: 0
